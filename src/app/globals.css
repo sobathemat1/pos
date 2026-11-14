@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+html.dark {
+  --stone-50: 250 250 249;
+  --stone-100: 245 245 244;
+  --stone-200: 231 229 228;
+  --stone-300: 214 211 209;
+  --stone-400: 168 162 158;
+  --stone-500: 120 113 108;
+  --stone-600: 87 83 78;
+  --stone-700: 68 64 60;
+  --stone-800: 41 37 36;
+  --stone-900: 28 25 23;
+  --stone-950: 15 13 12;
+}
+
+html.light {
+  --stone-50: 15 13 12;
+  --stone-100: 24 20 18;
+  --stone-200: 41 36 32;
+  --stone-300: 68 61 55;
+  --stone-400: 100 92 84;
+  --stone-500: 125 117 109;
+  --stone-600: 156 148 139;
+  --stone-700: 209 202 192;
+  --stone-800: 230 225 218;
+  --stone-900: 255 255 255;
+  --stone-950: 246 244 239;
+}
+
+@layer base {
+  body {
+    @apply bg-stone-950 text-stone-100 antialiased transition-colors duration-200;
+  }
+}
+
+/* Realistic Jagged Thermal Receipt Paper (Always Physical Paper Palette) */
+.receipt-paper {
+  --stone-50: 250 250 249;
+  --stone-100: 245 245 244;
+  --stone-200: 231 229 228;
+  --stone-300: 214 211 209;
+  --stone-400: 168 162 158;
+  --stone-500: 120 113 108;
+  --stone-600: 87 83 78;
+  --stone-700: 68 64 60;
+  --stone-800: 41 37 36;
+  --stone-900: 28 25 23;
+  --stone-950: 12 10 9;
+  background: #fafaf7;
+  color: #1c1917;
+  box-shadow:
+    0 12px 28px -6px rgba(0, 0, 0, 0.22),
+    0 4px 10px -4px rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+
+.receipt-paper::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: radial-gradient(
+    circle,
+    transparent,
+    transparent 50%,
+    #fafaf7 50%,
+    #fafaf7 100%
+  );
+  background-size: 14px 18px;
+}
+
+.receipt-paper::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: radial-gradient(
+    circle,
+    transparent,
+    transparent 50%,
+    #fafaf7 50%,
+    #fafaf7 100%
+  );
+  background-size: 14px 18px;
+  transform: rotate(180deg);
+}
+
+/* Thermal Paper Feed Animation */
+@keyframes feedPaper {
+  0% {
+    transform: translateY(36px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-paper {
+  animation: feedPaper 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scrollbar Utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Print Fallback Thermal Mode */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .receipt-paper {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+  }
+  .receipt-paper::before,
+  .receipt-paper::after {
+    display: none !important;
+  }
+}
